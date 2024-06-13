@@ -19,6 +19,8 @@
                         </div>
                         <!-- Tambahkan tombol tambah data di sini -->
                         <a href="{{ route('pemakaianair.index') }}" class="btn btn-success btn-sm">Tambah Data</a>
+                        <!-- Tambahkan tombol download CSV di sini -->
+                        <a href="{{ route('table.downloadCSV') }}" class="btn btn-secondary btn-sm">Download CSV</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,11 +45,17 @@
                                     <td>{{ $pemakaianAir->tanggal }}</td>
                                     <td class="text-center">{{ $pemakaianAir->pemakaian_air }}</td>
                                     <td>{{ $pemakaianAir->waktu }}</td>
-                                    <td>{{ $pemakaianAir->gambar_meteran }}</td>
+                                    <td>
+                                        <img src="{{ asset('../storage/app/public/meteran_images' . $pemakaianAir->gambar_meteran) }}" alt="Citra Pemakaian Air" style="max-width: 100px; max-height: 100px;">
+                                    </td>
                                     <td>
                                         <!-- Action buttons -->
-                                        <button class="btn btn-sm btn-info">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                        <a href="{{ route('pemakaianair.edit', $pemakaianAir->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                        <form action="{{ route('pemakaianair.destroy', $pemakaianAir->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

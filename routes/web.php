@@ -42,4 +42,13 @@ Route::get('/pemakaianair', [PemakaianAirController::class, 'index'])->name('pem
 Route::get('/tagihanair', [WaterBillController::class, 'index'])->name('tagihanair.index');
 Route::post('/tambah', [PemakaianAirController::class, 'store'])->name('pemakaianair.store');
 
+// routes/web.php
 
+Route::get('/pemakaianair/{id}/edit', [PemakaianAirController::class, 'edit'])->name('pemakaianair.edit');
+Route::put('/pemakaianair/{id}', [PemakaianAirController::class, 'update'])->name('pemakaianair.update');
+Route::delete('/pemakaianair/{id}', [PemakaianAirController::class, 'destroy'])->name('pemakaianair.destroy');
+
+// Route::get('/tagihan/{id}/edit', [TagihanController::class, 'edit'])->name('tagihan.edit');
+// Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
+
+Route::get('/table/download', [TableController::class, 'downloadCSV'])->name('table.downloadCSV');

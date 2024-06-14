@@ -6,34 +6,43 @@
     <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
-                <h1 class="h4">Device Status</h1>
+                <h1 class="h4">Status Perangkat</h1>
             </div>
             <div class="card-body">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-muted"><h6>ID</h6></th>
-                            <th class="text-muted"><h6>Name</h6></th>
+                            <th class="text-muted"><h6>Nama</h6></th>
                             <th class="text-muted"><h6>Status</h6></th>
+                            <th class="text-muted"><h6>Aksi</h6></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Dummy data for illustration purposes -->
+                        @foreach($devices as $device)
                         <tr>
-                            <td>1</td>
-                            <td>Device A</td>
-                            <td><span class="badge badge-success">On</span></td>
+                            <td>{{ $device->id }}</td>
+                            <td>{{ $device->name }}</td>
+                            <td>
+                                <span class="badge {{ $device->status == 'On' ? 'badge-success' : 'badge-danger' }}">
+                                    {{ $device->status }}
+                                </span>
+                            </td>
+                            <td>
+                                @if($device->status == 'On')
+                                    <form action="{{ route('status.turnOff', $device->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">Matikan</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('status.turnOn', $device->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success">Nyalakan</button>
+                                    </form>
+                                @endif
+                            </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Device B</td>
-                            <td><span class="badge badge-danger">Off</span></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Device C</td>
-                            <td><span class="badge badge-success">On</span></td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

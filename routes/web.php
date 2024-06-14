@@ -48,7 +48,11 @@ Route::get('/pemakaianair/{id}/edit', [PemakaianAirController::class, 'edit'])->
 Route::put('/pemakaianair/{id}', [PemakaianAirController::class, 'update'])->name('pemakaianair.update');
 Route::delete('/pemakaianair/{id}', [PemakaianAirController::class, 'destroy'])->name('pemakaianair.destroy');
 
+
 // Route::get('/tagihan/{id}/edit', [TagihanController::class, 'edit'])->name('tagihan.edit');
 // Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
 
 Route::get('/table/download', [TableController::class, 'downloadCSV'])->name('table.downloadCSV');
+
+Route::post('/status/{id}/turn-on', [StatusController::class, 'turnOn'])->name('status.turnOn');
+Route::post('/status/{id}/turn-off', [StatusController::class, 'turnOff'])->name('status.turnOff');

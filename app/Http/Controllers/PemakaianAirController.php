@@ -70,8 +70,10 @@ public function update(Request $request, $id)
             'gambar_meteran' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('gambar_meteran')->store('meteran_images', 'public');
-
+        if ($request->hasFile('gambar_meteran')) {
+            // Store the uploaded image in storage/app/public/gambar_meteran
+            $imagePath = $request->file('gambar_meteran')->store('gambar_meteran', 'public');
+        }
         // Gunakan DB::table() dengan benar setelah di-import
         DB::table('pemakaian_air')->insert([
             'nama_pengguna' => $request->nama_pengguna,

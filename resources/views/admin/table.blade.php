@@ -46,7 +46,7 @@
                                     <td class="text-center">{{ $pemakaianAir->pemakaian_air }}</td>
                                     <td>{{ $pemakaianAir->waktu }}</td>
                                     <td>
-                                        <img src="{{ asset('../storage/app/public/meteran_images' . $pemakaianAir->gambar_meteran) }}" alt="Citra Pemakaian Air" style="max-width: 100px; max-height: 100px;">
+                                        <img src="{{ asset('storage/' . $pemakaianAir->gambar_meteran) }}" alt="Citra Pemakaian Air" style="max-width: 90px; max-height: 90px;">
                                     </td>
                                     <td>
                                         <!-- Action buttons -->

@@ -56,3 +56,6 @@ Route::get('/table/download', [TableController::class, 'downloadCSV'])->name('ta
 
 Route::post('/status/{id}/turn-on', [StatusController::class, 'turnOn'])->name('status.turnOn');
 Route::post('/status/{id}/turn-off', [StatusController::class, 'turnOff'])->name('status.turnOff');
+Route::get('/statuse/create', [StatusController::class, 'create'])->name('status.create');
+Route::post('/status/store', [StatusController::class, 'store'])->name('status.store');
+Route::delete('/status/{id}', [StatusController::class, 'destroy'])->name('status.delete');

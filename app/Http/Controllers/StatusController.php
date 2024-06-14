@@ -31,4 +31,33 @@ class StatusController extends Controller
 
         return redirect()->back()->with('success', 'Perangkat berhasil dimatikan.');
     }
+
+    public function create()
+    {
+        return view('admin.createstatus');
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi data jika diperlukan
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Simpan data ke database
+        $status = new Status();
+        $status->name = $request->name;
+        $status->save();
+
+        // Redirect ke halaman status perangkat dengan pesan sukses atau langsung kembali ke halaman sebelumnya
+        return redirect()->route('status.index')->with('success', 'Status added successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $device = Status::findOrFail($id);
+        $device->delete();
+
+        return redirect()->route('status.index')->with('success', 'Status deleted successfully!');
+    }
 }

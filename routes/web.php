@@ -39,8 +39,10 @@ Route::get('/pemakaianair', [PemakaianAirController::class, 'index'])->name('pem
 // Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
 
 // Route::resource('tagihan', 'WaterBillController');
-Route::get('/tagihanair', [WaterBillController::class, 'index'])->name('tagihanair.index');
+Route::get('/tagihanair', [TagihanController::class, 'create'])->name('tagihanair.create');
+Route::post('/tagihanair/simpan-data', [TagihanController::class, 'store'])->name('tagihanair.store');
 Route::post('/tambah', [PemakaianAirController::class, 'store'])->name('pemakaianair.store');
+
 
 // routes/web.php
 
@@ -56,6 +58,6 @@ Route::get('/table/download', [TableController::class, 'downloadCSV'])->name('ta
 
 Route::post('/status/{id}/turn-on', [StatusController::class, 'turnOn'])->name('status.turnOn');
 Route::post('/status/{id}/turn-off', [StatusController::class, 'turnOff'])->name('status.turnOff');
-Route::get('/statuse/create', [StatusController::class, 'create'])->name('status.create');
+Route::get('/status/create', [StatusController::class, 'create'])->name('status.create');
 Route::post('/status/store', [StatusController::class, 'store'])->name('status.store');
 Route::delete('/status/{id}', [StatusController::class, 'destroy'])->name('status.delete');

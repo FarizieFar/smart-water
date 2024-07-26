@@ -3,33 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\WaterBill;
 
 class TagihanController extends Controller
 {
-    public function index(){
-        return view('admin.tagihan');
+    // public function index(){
+    //     return view('admin.tagihan');
+    // }
+
+    public function index()
+    {
+        $bills = WaterBill::all(); // Ambil semua data dari tabel water_bills
+        return view('admin.tagihan', compact('bills'));
     }
 
-    public function downloadCSV()
-{
-    $dataPemakaianAir = PemakaianAir::all();
-
-    $csvData = "Id,Nama Pengguna,Tanggal,Pemakaian Air,Waktu\n";
-
-    foreach ($dataPemakaianAir as $pemakaianAir) {
-        $csvData .= "{$pemakaianAir->id},"
-            . "\"{$pemakaianAir->nama_pengguna}\","
-            . "{$pemakaianAir->tanggal},"
-            . "{$pemakaianAir->pemakaian_air},"
-            . "{$pemakaianAir->waktu}\n";
+    public function create()
+    {
+        return view('admin.tagihanair');
     }
 
-    $csvData = mb_convert_encoding($csvData, 'UTF-16LE', 'UTF-8');
-    $headers = [
-        'Content-Type' => 'text/csv; charset=UTF-16LE',
-        'Content-Disposition' => 'attachment; filename="data_pemakaian_air.csv"',
-    ];
+    public function store(Request $request)
+    {
+        // Validasi request jika diperlukan
+        $validatedData = $request->validate([
+            'meter_name' => 'required|string',
+            'date' => 'required|date',
+            'extracted_text' => 'required|string',
+            'time' => 'required|string',
+            'image_filename' => 'required|string',
+        ]);
 
-    return Response::make($csvData, 200, $headers);
-}
+        // Simpan data ke dalam database
+        WaterBill::create($validatedData);
+
+        // Redirect ke halaman yang sesuai atau beri respons sesuai kebutuhan
+        return redirect()->route('tagihan.index')->with('success', 'Data pelanggan berhasil ditambahkan.');
+    }
+    
 }

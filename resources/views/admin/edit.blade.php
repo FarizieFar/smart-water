@@ -42,7 +42,27 @@
                             <small class="text-muted">Max 2MB. Allowed types: jpg, png, jpeg, gif.</small>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Data</button>
+                        <button type="submit" id="updateButton" class="btn btn-primary">Update Data</button>
+                        <script>
+                            document.getElementById('updateButton').addEventListener('click', function(event) {
+                                event.preventDefault(); // Mencegah pengiriman formulir jika diperlukan
+                                
+                                // Lakukan logika update data di sini (misalnya, melalui AJAX, jika ada)
+                                
+                                // Tampilkan SweetAlert setelah proses update data
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Update Data Sukses',
+                                    text: 'Data Anda telah berhasil diperbarui!',
+                                    confirmButtonText: 'OK'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Kembali ke halaman sebelumnya setelah menekan tombol OK
+                                        window.history.back();
+                                    }
+                                });
+                            });
+                        </script>
                     </form>
                 </div>
             </div>

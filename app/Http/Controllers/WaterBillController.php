@@ -3,36 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\WaterBill;
 
 class WaterBillController extends Controller
 {
-    public function index(){
-        $bills = WaterBill::all();
-        return view('tagihan.index', compact('bills'));
+    public function index()
+    {
+        $bills = WaterBill::all(); // Ambil semua data dari tabel water_bills
+        return view('admin.tagihan', compact('bills'));
     }
 
     public function create()
     {
-        // Logic untuk menampilkan form pembuatan tagihan air baru
+        return view('admin.tagihan');
     }
 
     public function store(Request $request)
     {
-        // Logic untuk menyimpan tagihan air baru ke database
-    }
+        // Validasi request jika diperlukan
+        $validatedData = $request->validate([
+            'meter_name' => 'required|string',
+            'date' => 'required|date',
+            'extracted_text' => 'required|string',
+            'time' => 'required|string',
+            'image_filename' => 'required|string',
+        ]);
 
-    public function edit($id)
-    {
-        // Logic untuk menampilkan form pengeditan tagihan air berdasarkan ID
-    }
+        // Simpan data ke dalam database
+        WaterBill::create($validatedData);
 
-    public function update(Request $request, $id)
-    {
-        // Logic untuk menyimpan perubahan pada tagihan air ke database
-    }
-
-    public function destroy($id)
-    {
-        // Logic untuk menghapus tagihan air dari database
+        // Redirect ke halaman yang sesuai atau beri respons sesuai kebutuhan
+        return redirect()->route('tagihanair.index')->with('success', 'Data pelanggan berhasil ditambahkan.');
     }
 }

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('../black-dashboard-master/assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('../black-dashboard-master/assets/img/favicon.png') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>
     Smart Water Meter Reader - Meteranqu|Web Monitoring
   </title>

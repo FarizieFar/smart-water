@@ -11,7 +11,7 @@
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-3">
-                    <!-- Tambahkan tombol tambah data di sini -->
+                <!-- Tambahkan tombol tambah data di sini -->
                 <a href="{{route('status.create')}}" class="btn btn-success btn-sm">Tambah Data</a>
                 </div>
                 <table class="table table-hover">

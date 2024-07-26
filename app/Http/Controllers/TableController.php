@@ -32,7 +32,7 @@ class TableController extends Controller
     $csvData = mb_convert_encoding($csvData, 'UTF-16LE', 'UTF-8');
     $headers = [
         'Content-Type' => 'text/csv; charset=UTF-16LE',
-        'Content-Disposition' => 'attachment; filename="data_pemakaian_air.csv"',
+        'Content-Disposition' => 'attachment; filename="Water-Meter-4.csv"',
     ];
 
     return Response::make($csvData, 200, $headers);
